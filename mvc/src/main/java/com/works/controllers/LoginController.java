@@ -42,7 +42,9 @@ public class LoginController {
     @PostMapping("login")
     public String login( Customer customer ) {
         boolean status = customerService.login(customer);
-        System.out.println("Login Status : " + status);
+        if(status) {
+            return "redirect:/dashboard";
+        }
         return "login";
     }
     

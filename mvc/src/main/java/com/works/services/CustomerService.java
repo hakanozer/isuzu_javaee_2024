@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.works.entities.Customer;
 import com.works.models.Product;
 import com.works.repositories.CustomerRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
@@ -23,13 +24,14 @@ public class CustomerService {
     
     final ObjectMapper objectMapper;
     final CustomerRepository customerRepository;
+    final HttpServletRequest req;
     
     public boolean login(Customer customer) {
         Optional<Customer> optional = customerRepository.findByEmailAndPasswordEquals(customer.getEmail(), customer.getPassword());
         boolean status = optional.isPresent();
         if (status) {
             Customer c = optional.get();
-            System.out.println(c);
+            req.getSession().setAttribute("customer", c);
         }
         return status;
     }
