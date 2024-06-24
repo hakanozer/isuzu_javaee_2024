@@ -18,7 +18,6 @@ public class DashboardController {
     
     @GetMapping("dashboard")
     public String dashboard(Model model) {
-        
         List<Note> notes = noteService.allNote();
         model.addAttribute("notes", notes);
         return "dashboard";

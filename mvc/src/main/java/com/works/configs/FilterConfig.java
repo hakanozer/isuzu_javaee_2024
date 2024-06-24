@@ -2,6 +2,7 @@
 package com.works.configs;
 
 
+import com.works.entities.Customer;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -36,6 +37,8 @@ public class FilterConfig implements Filter{
             if(objCustomer == null) {
                 res.sendRedirect("/");
             }else {
+                Customer customer = (Customer) objCustomer;
+                req.setAttribute("customer", customer);
                 fc.doFilter(req, res); 
             }
         }else {
