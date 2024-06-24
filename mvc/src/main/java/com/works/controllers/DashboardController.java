@@ -3,7 +3,6 @@ package com.works.controllers;
 
 import com.works.entities.Note;
 import com.works.services.NoteService;
-import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,15 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 public class DashboardController {
     
-    final HttpServletRequest req;
     final NoteService noteService;
     
     @GetMapping("dashboard")
     public String dashboard(Model model) {
-        boolean status = req.getSession().getAttribute("customer") == null;
-        if (status) {
-            return "redirect:/";
-        }
+        
         List<Note> notes = noteService.allNote();
         model.addAttribute("notes", notes);
         return "dashboard";
