@@ -22,7 +22,7 @@ public class FilterConfig implements Filter{
         HttpServletResponse res = (HttpServletResponse) sr1;
         
         String url = req.getRequestURI();
-        String[] freeUrls = {"/", "/login"};
+        String[] freeUrls = {"/", "/login", "/productSave"};
         boolean loginStatus = true;
         for(String item : freeUrls) {
             if(item.equals(url)) {

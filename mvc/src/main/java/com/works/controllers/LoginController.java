@@ -49,4 +49,12 @@ public class LoginController {
     }
     
     
+    @GetMapping("logout")
+    public String logout() {
+        customerService.logout();
+        return "redirect:/";
+    }
+    
+    
+    
 }

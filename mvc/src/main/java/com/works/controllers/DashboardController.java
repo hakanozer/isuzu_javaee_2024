@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -27,6 +28,13 @@ public class DashboardController {
     @PostMapping("noteAdd")
     public String noteAdd( Note note ) {
         noteService.save(note);
+        return "redirect:/dashboard";
+    }
+    
+    
+    @GetMapping("deleteNote/{nid}")
+    public String deleteNote(@PathVariable Long nid) {
+        noteService.noteDelete(nid);
         return "redirect:/dashboard";
     }
     

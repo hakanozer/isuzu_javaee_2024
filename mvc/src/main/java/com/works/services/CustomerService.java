@@ -37,6 +37,11 @@ public class CustomerService {
     }
     
     
+    public void logout() {
+        req.getSession().removeAttribute("customer");
+    }
+    
+    
     public void addProduct() {
         
         RestTemplate restTemplate = new RestTemplate();

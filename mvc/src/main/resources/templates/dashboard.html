@@ -34,7 +34,7 @@
             <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">ID</th>
+                    <th scope="col">No</th>
                     <th scope="col">Title</th>
                     <th scope="col">Detail</th>
                     <th scope="col">Date</th>
@@ -44,8 +44,8 @@
                 <tbody>
                     
                 <th:block if="${notes != null}"> 
-                  <tr th:each="item : ${notes}" >
-                    <th scope="row" th:text="${item.nid}"></th>
+                  <tr th:each="item, iter : ${notes}" >
+                    <th scope="row" th:text="${iter.index + 1}"></th>
                     <td th:text="${item.title}"></td>
                     <td th:text="${item.detail}"></td>
                     <td th:text="${item.ndate}"></td>

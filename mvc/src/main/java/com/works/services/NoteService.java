@@ -24,5 +24,15 @@ public class NoteService {
         return noteRepository.findAll();
     }
     
+    public boolean noteDelete( Long nid ) {
+        try {
+            noteRepository.deleteById(nid);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+        
+    }
+    
     
 }
