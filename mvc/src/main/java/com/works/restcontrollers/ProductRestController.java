@@ -6,11 +6,13 @@ import com.works.services.ProductService;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -26,8 +28,11 @@ public class ProductRestController {
     }
     
     @GetMapping("list")
-    public List<Product> list() {
-        return productService.list();
+    public Page<Product> list( 
+            @RequestParam(defaultValue = "0") int pageCount,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        return productService.list(pageCount, size);
     }
     
     @GetMapping("delete/{stPid}")
@@ -38,6 +43,16 @@ public class ProductRestController {
     @PostMapping("update")
     public Product update( @Valid @RequestBody Product product ) {
         return productService.update(product);
+    }
+    
+    @PostMapping("allSave")
+    public List<Product> allSave( @RequestBody List<Product> products ) {
+        return productService.saveAll(products);
+    }
+    
+    @GetMapping("search")
+    public List<Product> search(@RequestParam String q) {
+        return productService.search(q);
     }
 
 }
